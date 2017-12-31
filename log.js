@@ -33,23 +33,23 @@ function containerLogs(container, image) {
   logStream.on('data', function (line) {
     let timestamp = null;
 
-    try {
-      // try to JSON parse
-      line = JSON5.parse(line);
-    } catch (err) {
-      // look for timestamps if not an object
-      timestamp = chrono.parse(line)[0];
-    }
+    // try {
+    //   // try to JSON parse
+    //   line = JSON5.parse(line);
+    // } catch (err) {
+    //   // look for timestamps if not an object
+    //   timestamp = chrono.parse(line)[0];
+    // }
 
-    if (timestamp) {
-      // escape for regexp and remove from line
-      timestamp.text = timestamp.text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-      line = line.replace(new RegExp(' *[^ ]?' + timestamp.text + '[^ ]? *'), '');
-      // use timestamp as line timestamp
-      baseMessage.timestamp = Date.parse(timestamp.start.date());
-    } else {
+    // if (timestamp) {
+    //   // escape for regexp and remove from line
+    //   timestamp.text = timestamp.text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+    //   line = line.replace(new RegExp(' *[^ ]?' + timestamp.text + '[^ ]? *'), '');
+    //   // use timestamp as line timestamp
+    //   baseMessage.timestamp = Date.parse(timestamp.start.date());
+    // } else {
       baseMessage.timestamp = Date.now();
-    }
+    // }
 
     // update default message
     baseMessage.content = line;
@@ -83,7 +83,7 @@ function containerLogs(container, image) {
   });
 }
 
-docker.listContainers({all: true}, function(err, containers) {
+docker.listContainers({all: false}, function(err, containers) {
     containers.forEach(function(data){
         console.log(data);
         containerLogs(docker.getContainer(data.Id),data.Image);
