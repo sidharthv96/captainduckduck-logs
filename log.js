@@ -86,7 +86,7 @@ function containerLogs(container, image) {
 
 var opts = {
     "all": true,
-    "limit": 1,
+    "limit": 5,
     "filters": '{"status": "running"}'
   };
 
