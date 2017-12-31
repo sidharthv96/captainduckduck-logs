@@ -72,7 +72,8 @@ function containerLogs(container, image) {
     stderr: true
   }, function(err, stream){
     if(err) {
-      return logger.error(err.message);
+        console.log(err.message);
+      return;
     }
     container.modem.demuxStream(stream, logStream, logStream);
     stream.on('end', function(){
