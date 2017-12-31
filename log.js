@@ -38,7 +38,7 @@ function containerLogs(container, image) {
       line = JSON5.parse(line);
     } catch (err) {
       // look for timestamps if not an object
-      timestamp = argv.parseDate ? chrono.parse(line)[0] : null;
+      timestamp = chrono.parse(line)[0];
     }
 
     if (timestamp) {
