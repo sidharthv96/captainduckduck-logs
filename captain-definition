@@ -5,7 +5,7 @@
         "RUN npm install -g rtail dockerode",
         "RUN mkdir -p /usr/src/app",
         "WORKDIR /usr/src/app",
-        "COPY ./src/test.js /usr/src/app/",        
+        "COPY ./src/ /usr/src/app/",        
         "RUN npm install dockerode",
         "EXPOSE 80",
         "EXPOSE 9091/udp",
