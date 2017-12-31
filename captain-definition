@@ -3,6 +3,10 @@
     "dockerfileLines": [
         "FROM node:alpine",
         "RUN npm install -g rtail dockerode",
+        "RUN mkdir -p /usr/src/app",
+        "WORKDIR /usr/src/app",
+        "COPY ./src/test.js /usr/src/app/",        
+        "RUN npm install dockerode",
         "EXPOSE 80",
         "EXPOSE 9091/udp",
         "CMD [\"rtail-server\",\"--web-port\",\"80\",\"--web-host\",\"0.0.0.0\",\"--udp-host\",\"0.0.0.0\",\"--udp-port\",\"9091\"]"
