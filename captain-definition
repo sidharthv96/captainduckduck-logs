@@ -9,7 +9,6 @@
         "RUN npm install",
         "EXPOSE 80",
         "EXPOSE 9091/udp",
-        "RUN node log.js",
-        "CMD [\"rtail-server\",\"--web-port\",\"80\",\"--web-host\",\"0.0.0.0\",\"--udp-host\",\"0.0.0.0\",\"--udp-port\",\"9091\"]"
+        "CMD [\"/bin/sh\",\"-C\",\"startup.sh\"]        
     ]
 }
