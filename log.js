@@ -36,8 +36,8 @@ function containerLogs(container) {
 }
 
 docker.createContainer({
-  Image: 'library/alpine',
-  Cmd: ['/bin/bash', '-c', 'ping 8.8.8.8']
+  Image: 'alpine',
+  Cmd: ['/bin/ash', '-c', 'ping 8.8.8.8']
 }, function(err, container) {
   container.start({}, function(err, data) {
     containerLogs(container);
