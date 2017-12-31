@@ -1,8 +1,6 @@
 var Docker = require('dockerode');
 var fs     = require('fs');
 var stream = require('stream');
-
-
 const dgram = require('dgram')
 const split = require('split')
 const chrono = require('chrono-node')
