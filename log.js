@@ -32,6 +32,7 @@ function containerLogs(container, image) {
   let baseMessage = { id: image };
   logStream.on('data', function (line) {
     let timestamp = null;
+    console.log(line);
 
     // try {
     //   // try to JSON parse
@@ -83,9 +84,13 @@ function containerLogs(container, image) {
   });
 }
 
-docker.listContainers({all: false}, function(err, containers) {
+var opts = {
+    "limit": 1,
+    "filters": '{"status": "running"}'
+  };
+
+docker.listContainers(opts, function(err, containers) {
     containers.forEach(function(data){
-        console.log(data);
         containerLogs(docker.getContainer(data.Id),data.Image);
     });
 });
