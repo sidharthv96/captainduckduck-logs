@@ -9,6 +9,6 @@
         "RUN npm install",
         "EXPOSE 80",
         "EXPOSE 9091/udp",
-        "CMD [\"/bin/sh\",\"-C\",\"startup.sh\"]        
+        "CMD [\"/bin/sh\",\"-C\",\"startup.sh\"]"    
     ]
 }
