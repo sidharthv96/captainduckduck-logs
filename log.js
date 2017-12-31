@@ -1,6 +1,6 @@
 var Docker = require('dockerode');
 var fs     = require('fs');
-
+var stream = require('stream');
 var docker = new Docker({
   socketPath: '/var/hrun/docker.sock'
 });
