@@ -25,11 +25,11 @@ socket.bind(function () {
 /**
  * Get logs from running container
  */
-function containerLogs(container) {
+function containerLogs(container, image) {
 
   // create a single stream for stdin and stdout
   var logStream = new stream.PassThrough();
-  let baseMessage = { id: container.name };
+  let baseMessage = { id: image };
   logStream.on('data', function (line) {
     let timestamp = null;
 
@@ -85,6 +85,6 @@ function containerLogs(container) {
 docker.listContainers({all: true}, function(err, containers) {
     containers.forEach(function(data){
         console.log(data);
-        containerLogs(data);
+        containerLogs(docker.getContainer(data.Id),data.Image);
     });
 });
