@@ -2,13 +2,14 @@
     "schemaVersion": 1,
     "dockerfileLines": [
         "FROM node:alpine",
-        "RUN npm install -g rtail dockerode",
+        "RUN npm install -g rtail",
         "RUN mkdir -p /usr/src/app",
         "WORKDIR /usr/src/app",
         "COPY ./src/ /usr/src/app/",        
         "RUN npm install dockerode",
         "EXPOSE 80",
         "EXPOSE 9091/udp",
+        "RUN node log.js",
         "CMD [\"rtail-server\",\"--web-port\",\"80\",\"--web-host\",\"0.0.0.0\",\"--udp-host\",\"0.0.0.0\",\"--udp-port\",\"9091\"]"
     ]
 }
