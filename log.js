@@ -85,13 +85,17 @@ function containerLogs(container, image) {
 }
 
 var opts = {
-    "all": true,
     "limit": 5,
     "filters": '{"status": "running"}'
   };
 
 docker.listContainers(opts, function(err, containers) {
     containers.forEach(function(data){
-        containerLogs(docker.getContainer(data.Id),data.Image);
+      console.log('====================================');
+      console.log(data);
+      console.log(data.Id);
+      console.log(data.Image);
+      console.log('====================================');
+        // containerLogs(docker.getContainer(data.Id),data.Image);
     });
 });
