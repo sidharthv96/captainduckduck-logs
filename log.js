@@ -90,7 +90,7 @@ var opts = {
   };
 
   opts["filters"] = {
-    "status": "running"
+    status: "running"
   };
 docker.listContainers(opts, function(err, containers) {
     containers.forEach(function(data){
