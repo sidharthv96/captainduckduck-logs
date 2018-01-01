@@ -24,10 +24,10 @@ socket.bind(function () {
 
 
 /**
- * Get logs from running container
- */
+* Get logs from running container
+*/
 function containerLogs(container, image) {
-
+  
   // create a single stream for stdin and stdout
   let logStream = new stream.PassThrough();
   let baseMessage = { id: image };
@@ -38,15 +38,15 @@ function containerLogs(container, image) {
     console.log(image);
     console.log(line);
     console.log("==============================");
-
+    
     // try {
     //   // try to JSON parse
     //   line = JSON5.parse(line);
     // } catch (err) {
     //   // look for timestamps if not an object
-      timestamp = chrono.parse(line)[0];
+    timestamp = chrono.parse(line)[0];
     // }
-
+    
     if (timestamp) {
       // escape for regexp and remove from line
       timestamp.text = timestamp.text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
@@ -56,45 +56,46 @@ function containerLogs(container, image) {
     } else {
       baseMessage.timestamp = Date.now();
     }
-
+    
     // update default message
     baseMessage.id = image;
     baseMessage.content = line;
-
+    
     // prepare binary message
     let buffer = new Buffer(JSON.stringify(baseMessage));
-
+    
     // set semaphore
     isSending ++;
-
+    
     socket.send(buffer, 0, buffer.length, "9091", "localhost", function () {
       isSending --;
       if (isClosed && !isSending) socket.close();
     })
   });
-
+  
   container.logs({
     follow: true,
     stdout: true,
     stderr: true
   }, function(err, stream){
     if(err) {
-        console.log(err.message);
+      console.log(err.message);
       return;
     }
     container.modem.demuxStream(stream, logStream, logStream);
     stream.on('end', function(){
       logStream.end('!stop!');
     });
-
+    
   });
 }
 
 var opts = {
-    "all": false,    
-  };
+  "all": false,    
+};
 
-docker.listContainers(opts, function(err, containers) {
+setTimeout(function(){
+  docker.listContainers(opts, function(err, containers) {
     containers.forEach(function(data){
       console.log('====================================');
       console.log(data);
@@ -105,4 +106,6 @@ docker.listContainers(opts, function(err, containers) {
         containerLogs(docker.getContainer(data.Id),data.Image);
       }
     });
-});
+  });
+}, 2000);
+
