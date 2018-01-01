@@ -7,6 +7,7 @@
     "test": "node log.js"
   },
   "dependencies": {
+    "string_decoder":"",
     "dockerode": "^2.5.3",
     "chrono-node": "^1.0.6",
     "debug": "^2.1.0",

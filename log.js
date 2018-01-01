@@ -7,6 +7,7 @@ const chrono = require('chrono-node')
 const JSON5 = require('json5')
 const yargs = require('yargs')
 const map = require('through2-map')
+var StringDecoder = require('string_decoder').StringDecoder;
 
 var docker = new Docker({
   socketPath: '/var/hrun/docker.sock'
@@ -30,8 +31,10 @@ function containerLogs(container, image) {
   // create a single stream for stdin and stdout
   var logStream = new stream.PassThrough();
   let baseMessage = { id: image };
-  logStream.on('data', function (line) {
+  var decoder = new StringDecoder('utf8');
+  logStream.on('data', function (chunk) {
     let timestamp = null;
+    let line = decoder.write(chunk);
     console.log(line);
 
     // try {
