@@ -35,7 +35,9 @@ function containerLogs(container, image) {
   logStream.on('data', function (chunk) {
     let timestamp = null;
     let line = decoder.write(chunk);
+    console.log(image);
     console.log(line);
+    console.log("==============================");
 
     // try {
     //   // try to JSON parse
