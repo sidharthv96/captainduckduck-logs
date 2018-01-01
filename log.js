@@ -101,6 +101,8 @@ docker.listContainers(opts, function(err, containers) {
       console.log(data.Id);
       console.log(data.Image);
       console.log('====================================');
+      if(data.Image != "nginx:latest"){
         containerLogs(docker.getContainer(data.Id),data.Image);
+      }
     });
 });
