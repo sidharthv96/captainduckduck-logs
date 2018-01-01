@@ -31,7 +31,7 @@ function containerLogs(container, image) {
   // create a single stream for stdin and stdout
   let logStream = new stream.PassThrough();
   let baseMessage = { id: image };
-  var decoder = new StringDecoder('utf8');
+  let decoder = new StringDecoder('utf8');
   logStream.on('data', function (chunk) {
     let timestamp = null;
     let line = decoder.write(chunk);
@@ -56,6 +56,7 @@ function containerLogs(container, image) {
     // }
 
     // update default message
+    baseMessage.id = image;
     baseMessage.content = line;
 
     // prepare binary message
