@@ -85,8 +85,7 @@ function containerLogs(container, image) {
 }
 
 var opts = {
-    "all": true,
-    "limit": 1
+    "all": false,    
   };
 
 docker.listContainers(opts, function(err, containers) {
