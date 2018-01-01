@@ -29,7 +29,7 @@ socket.bind(function () {
 function containerLogs(container, image) {
 
   // create a single stream for stdin and stdout
-  var logStream = new stream.PassThrough();
+  let logStream = new stream.PassThrough();
   let baseMessage = { id: image };
   var decoder = new StringDecoder('utf8');
   logStream.on('data', function (chunk) {
