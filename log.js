@@ -86,7 +86,8 @@ function containerLogs(container, image) {
 
 var opts = {
     "all": true,
-    "limit": 5
+    "limit": 5,
+    "filters": {"status":"running"}
   };
 
 docker.listContainers(opts, function(err, containers) {
