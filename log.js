@@ -44,18 +44,18 @@ function containerLogs(container, image) {
     //   line = JSON5.parse(line);
     // } catch (err) {
     //   // look for timestamps if not an object
-    //   timestamp = chrono.parse(line)[0];
+      timestamp = chrono.parse(line)[0];
     // }
 
-    // if (timestamp) {
-    //   // escape for regexp and remove from line
-    //   timestamp.text = timestamp.text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-    //   line = line.replace(new RegExp(' *[^ ]?' + timestamp.text + '[^ ]? *'), '');
-    //   // use timestamp as line timestamp
-    //   baseMessage.timestamp = Date.parse(timestamp.start.date());
-    // } else {
+    if (timestamp) {
+      // escape for regexp and remove from line
+      timestamp.text = timestamp.text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+      line = line.replace(new RegExp(' *[^ ]?' + timestamp.text + '[^ ]? *'), '');
+      // use timestamp as line timestamp
+      baseMessage.timestamp = Date.parse(timestamp.start.date());
+    } else {
       baseMessage.timestamp = Date.now();
-    // }
+    }
 
     // update default message
     baseMessage.id = image;
