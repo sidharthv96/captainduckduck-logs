@@ -95,6 +95,6 @@ docker.listContainers(opts, function(err, containers) {
       console.log(data.Id);
       console.log(data.Image);
       console.log('====================================');
-        // containerLogs(docker.getContainer(data.Id),data.Image);
+        containerLogs(docker.getContainer(data.Id),data.Image);
     });
 });
